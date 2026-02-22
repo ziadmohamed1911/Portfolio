@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ziad Mohammed — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2a;
+      --navy-mid: #1b2d42;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --cream: #f5f0e8;
+      --text: #2c3e50;
+      --muted: #7a8a99;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(13,27,42,0.97);
+      backdrop-filter: blur(8px);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 4rem;
+      border-bottom: 1px solid rgba(201,168,76,0.3);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.4rem; font-weight: 700;
+      letter-spacing: 2px;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(245,240,232,0.75);
+      text-decoration: none; font-size: 0.85rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex; align-items: center;
+      padding: 0 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-line {
+      position: absolute; top: 0; right: 0;
+      width: 45%; height: 100%;
+      background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+      border-left: 1px solid rgba(201,168,76,0.15);
+    }
+    .hero-ornament {
+      position: absolute; right: 8%; top: 50%;
+      transform: translateY(-50%);
+      width: 280px; height: 280px;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-ornament::before {
+      content: '';
+      position: absolute;
+      width: 220px; height: 220px;
+      border: 1px solid rgba(201,168,76,0.1);
+      border-radius: 50%;
+    }
+    .hero-ornament-inner {
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(201,168,76,0.15), transparent);
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; color: var(--gold); font-weight: 900;
+    }
+    .hero-content { max-width: 600px; animation: fadeUp 0.9s ease both; }
+    .hero-tag {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.75rem; letter-spacing: 3px;
+      text-transform: uppercase; padding: 0.3rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      color: var(--white); line-height: 1.1;
+      font-weight: 900; margin-bottom: 0.5rem;
+    }
+    .hero-name span { color: var(--gold); }
+    .hero-title {
+      font-size: 1rem; color: var(--muted);
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-summary {
+      color: rgba(245,240,232,0.7);
+      font-size: 1.05rem; line-height: 1.75;
+      max-width: 480px; margin-bottom: 2.5rem;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--navy);
+      padding: 0.8rem 2rem; text-decoration: none;
+      font-weight: 600; font-size: 0.85rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      transition: background 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid rgba(201,168,76,0.5); color: var(--gold);
+      padding: 0.8rem 2rem; text-decoration: none;
+      font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;
+      transition: all 0.3s; display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+    .hero-contacts {
+      position: absolute; bottom: 2.5rem; left: 4rem;
+      display: flex; gap: 2rem;
+    }
+    .hero-contacts a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.8rem; letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    .hero-contacts a:hover { color: var(--gold); }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 4rem; }
+    .section-header { margin-bottom: 4rem; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 0.25rem; margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      color: var(--navy); font-weight: 700; line-height: 1.2;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--text); line-height: 1.85; font-size: 1.05rem;
+      margin-bottom: 1.2rem;
+    }
+    .about-info { display: flex; flex-direction: column; gap: 1.2rem; }
+    .info-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .info-item:last-child { border-bottom: none; }
+    .info-label {
+      font-size: 0.75rem; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold);
+      min-width: 80px; padding-top: 2px;
+    }
+    .info-value { color: var(--text); font-size: 0.95rem; }
+    .info-value a { color: var(--navy); text-decoration: none; }
+    .info-value a:hover { color: var(--gold); }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--cream); }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .skill-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.07);
+      padding: 2rem;
+      border-top: 3px solid var(--gold);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .skill-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+    .skill-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 1rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--navy); padding: 0.3rem 0.8rem;
+      font-size: 0.8rem; letter-spacing: 0.5px;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--navy); }
+    #projects .section-title { color: var(--white); }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .project-card {
+      background: var(--navy-mid);
+      border: 1px solid rgba(201,168,76,0.15);
+      padding: 2rem;
+      position: relative; overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .project-card:hover { transform: translateY(-4px); border-color: rgba(201,168,76,0.5); }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 0; background: var(--gold);
+      transition: height 0.4s ease;
+    }
+    .project-card:hover::before { height: 100%; }
+    .project-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.75rem; color: var(--gold);
+      letter-spacing: 2px; margin-bottom: 1rem;
+    }
+    .project-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--white);
+      font-weight: 700; margin-bottom: 0.75rem;
+    }
+    .project-desc {
+      color: rgba(245,240,232,0.6);
+      font-size: 0.9rem; line-height: 1.7;
+    }
+    .project-tech {
+      margin-top: 1.2rem; display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .tech-badge {
+      background: rgba(201,168,76,0.12);
+      color: var(--gold-light); font-size: 0.75rem;
+      padding: 0.2rem 0.7rem; letter-spacing: 1px;
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--white); }
+    .edu-card {
+      display: flex; gap: 3rem; align-items: flex-start;
+      padding: 2.5rem; border: 1px solid rgba(0,0,0,0.07);
+      border-left: 4px solid var(--gold);
+      max-width: 700px;
+    }
+    .edu-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: var(--gold);
+      font-weight: 700; min-width: 80px;
+    }
+    .edu-details h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; color: var(--navy); margin-bottom: 0.3rem;
+    }
+    .edu-details p { color: var(--muted); font-size: 0.95rem; }
+    .edu-gpa {
+      margin-top: 0.75rem;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(201,168,76,0.1);
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(201,168,76,0.3);
+      font-size: 0.85rem; color: var(--gold); font-weight: 600;
+    }
+
+    /* ── LANGUAGES ── */
+    #languages { background: var(--cream); }
+    .lang-grid { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .lang-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.07);
+      padding: 1.5rem 2.5rem; text-align: center;
+      border-top: 3px solid var(--gold);
+    }
+    .lang-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--navy); font-weight: 700;
+    }
+    .lang-level { font-size: 0.8rem; color: var(--muted); letter-spacing: 1px; margin-top: 0.3rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 3rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      border-top: 1px solid rgba(201,168,76,0.2);
+    }
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold); font-size: 1.2rem;
+    }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.85rem; transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      section { padding: 4rem 1.5rem; }
+      #hero { padding: 6rem 1.5rem 4rem; }
+      .hero-ornament { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-contacts { left: 1.5rem; }
+      footer { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">ZM</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-line"></div>
+    <div class="hero-ornament">
+      <div class="hero-ornament-inner">ZM</div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-tag">Computer Science Student</div>
+      <h1 class="hero-name">Ziad<br><span>Mohammed</span></h1>
+      <p class="hero-title">Full Stack Developer &amp; CS Student</p>
+      <p class="hero-summary">
+        Passionate Computer Science student focused on Full Stack Development.
+        Building real-world solutions through code — from Arduino systems to web applications and machine learning.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="mailto:ziadmohamed2492oo5@gmail.com" class="btn-outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-contacts">
+      <a href="tel:+201113630680">+20 11 1363 0680</a>
+      <a href="mailto:ziadmohamed2492oo5@gmail.com">ziadmohamed2492oo5@gmail.com</a>
+      <a href="https://www.linkedin.com/in/ziad-mohammed-468a7131b" target="_blank">LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header reveal">
+      <span class="section-label">Who I Am</span>
+      <h2 class="section-title">About Me</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I'm a Computer Science student at Future Academy in Cairo, with a strong passion for
+          building software that solves real problems. My journey started with hardware projects
+          using Arduino and has expanded into web development, game development, and machine learning.
+        </p>
+        <p>
+          I'm proficient in C++ and C# with strong OOP fundamentals, and I enjoy working across
+          different domains — from embedded systems and game engines to front-end interfaces and AI models.
+        </p>
+        <p>
+          I'm a self-driven learner who constantly explores new technologies, and I thrive in
+          collaborative environments where I can contribute and grow alongside others.
+        </p>
+      </div>
+      <div class="about-info reveal">
+        <div class="info-item">
+          <span class="info-label">Location</span>
+          <span class="info-value">El Nozha, Cairo, Egypt</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Email</span>
+          <span class="info-value"><a href="mailto:ziadmohamed2492oo5@gmail.com">ziadmohamed2492oo5@gmail.com</a></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Phone</span>
+          <span class="info-value">+20 11 1363 0680</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">LinkedIn</span>
+          <span class="info-value"><a href="https://www.linkedin.com/in/ziad-mohammed-468a7131b" target="_blank">ziad-mohammed-468a7131b</a></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Languages</span>
+          <span class="info-value">Arabic (Native) · English (Intermediate)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header reveal">
+      <span class="section-label">What I Know</span>
+      <h2 class="section-title">Skills &amp; Technologies</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Programming Languages</div>
+        <div class="skill-tags">
+          <span class="tag">C++</span>
+          <span class="tag">C#</span>
+          <span class="tag">Java</span>
+          <span class="tag">Python</span>
+          <span class="tag">Assembly x86</span>
+          <span class="tag">HTML</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Frameworks &amp; Platforms</div>
+        <div class="skill-tags">
+          <span class="tag">.NET</span>
+          <span class="tag">Unity</span>
+          <span class="tag">Android Studio</span>
+          <span class="tag">Visual Studio</span>
+          <span class="tag">Git</span>
+          <span class="tag">Arduino</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Development Areas</div>
+        <div class="skill-tags">
+          <span class="tag">OOP</span>
+          <span class="tag">Game Development</span>
+          <span class="tag">Embedded Systems</span>
+          <span class="tag">Web Front-End</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Mobile Apps</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Soft Skills</div>
+        <div class="skill-tags">
+          <span class="tag">Problem Solving</span>
+          <span class="tag">Team Communication</span>
+          <span class="tag">Task Management</span>
+          <span class="tag">Self-Driven Learning</span>
+          <span class="tag">Emotional Awareness</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header reveal">
+      <span class="section-label">What I've Built</span>
+      <h2 class="section-title">Projects</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-number">01</div>
+        <div class="project-name">Arduino Line Follower Car</div>
+        <p class="project-desc">An autonomous car based on Arduino Uno that follows a predefined path using sensors, with motor control to maintain accurate line tracking.</p>
+        <div class="project-tech"><span class="tech-badge">Arduino</span><span class="tech-badge">C++</span><span class="tech-badge">Sensors</span></div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-number">02</div>
+        <div class="project-name">Fire, Gas &amp; Smoke Detection System</div>
+        <p class="project-desc">A smart Arduino Uno-based system for detecting fire, gas, and smoke using multiple sensors, with automatic alerting and fire suppression.</p>
+        <div class="project-tech"><span class="tech-badge">Arduino</span><span class="tech-badge">C++</span><span class="tech-badge">IoT</span></div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-number">03</div>
+        <div class="project-name">Firefighting Car with Bluetooth Control</div>
+        <p class="project-desc">A firefighting vehicle remotely controlled via Bluetooth, equipped with a fire-extinguishing system built on Arduino Uno.</p>
+        <div class="project-tech"><span class="tech-badge">Arduino</span><span class="tech-badge">Bluetooth</span><span class="tech-badge">C++</span></div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-number">04</div>
+        <div class="project-name">Weather Prediction (AI / ML)</div>
+        <p class="project-desc">A machine learning model to forecast weather using historical data, aimed at practical applications in safety, planning, and decision-making.</p>
+        <div class="project-tech"><span class="tech-badge">Python</span><span class="tech-badge">Machine Learning</span><span class="tech-badge">AI</span></div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-number">05</div>
+        <div class="project-name">Memory Card Game</div>
+        <p class="project-desc">An interactive memory card game with responsive design and polished front-end logic built entirely in vanilla web technologies.</p>
+        <div class="project-tech"><span class="tech-badge">HTML</span><span class="tech-badge">CSS</span><span class="tech-badge">JavaScript</span></div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-number">06</div>
+        <div class="project-name">2D Shooter Game</div>
+        <p class="project-desc">A 2D shooter game implementing game mechanics, graphics rendering, and user interaction using OpenGL for real-time rendering.</p>
+        <div class="project-tech"><span class="tech-badge">OpenGL</span><span class="tech-badge">C++</span><span class="tech-badge">Game Dev</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-header reveal">
+      <span class="section-label">Academic Background</span>
+      <h2 class="section-title">Education</h2>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-year">2027</div>
+      <div class="edu-details">
+        <h3>Computer Science</h3>
+        <p>Future Academy — Cairo, Egypt</p>
+        <p style="margin-top:0.3rem; font-size:0.9rem; color:var(--text);">Currently enrolled · Expected graduation 2027</p>
+        <div class="edu-gpa">GPA: 3.1 / 4.0</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Ziad Mohammed</div>
+    <div class="footer-links">
+      <a href="mailto:ziadmohamed2492oo5@gmail.com">Email</a>
+      <a href="tel:+201113630680">Phone</a>
+      <a href="https://www.linkedin.com/in/ziad-mohammed-468a7131b" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
+  </script>
+</body>
+</html>
